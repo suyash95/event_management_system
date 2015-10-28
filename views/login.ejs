@@ -1,0 +1,74 @@
+<html>
+<head>
+    <h1>LOGIN</h1>
+     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+</head>
+<body>
+<div class="container z-depth-5 color-corrector">
+<div class="col s12 m2">
+    <div class="row martop">
+        <div class="col s12 m12">
+            <div>
+                <form class="col s12" method="post" action="/login" id="loginform">
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="input-field ">
+                                <div class="col s12">
+                                    <input id="ID" class="validate" name="ID" placeholder="ID" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="input-field ">
+                                <div class="col s12">
+                                    <input id="password" class="validate" name="password" placeholder="password"
+                                           type="password">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <button class="btn waves-effect waves-light mleft mmleft" type="submit" name="submitButton"
+                                    value="Submit">login
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#loginform').submit(function (event) {
+        event.preventDefault();
+        var credentials = {
+            ID: $('#ID').val(),
+            password: $('#password').val()
+        };
+        $.post("http://localhost:3000/login", credentials, function (auth) {
+            window.localStorage.setItem('token', auth.token);
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:3000/eventdetail",
+                beforeSend: function (xhr) {
+                    token = window.localStorage.getItem("token");
+                    console.log(token);
+                    xhr.setRequestHeader("x-access-token", token);
+                },
+                success: function () {
+                    window.location = "http://localhost:3000/eventdetail" + "?token=" + token;
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
+
+    
