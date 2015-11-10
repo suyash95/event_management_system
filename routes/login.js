@@ -11,7 +11,7 @@ router.get('/',function(req,res,next){
 
 router.post('/',function(req , res ,next){
     //console.log(req);
-var usrname = req.body.ID;
+var usrname = req.body.faculty_ID;
 var passwrd = req.body.password;
 
 crypto.pbkdf2(passwrd, 'Salt', 100, 30, function (err, key) {

@@ -6,7 +6,7 @@ module.exports = {
         //port: 3306,
         user: "root",
         password: "",
-        database: "dbmslab",
+        database: "eventmanagement",
         socketPath:'/opt/lampp/var/mysql/mysql.sock'
     },
     'secret': 'SUYASH'

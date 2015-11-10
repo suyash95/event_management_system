@@ -13,8 +13,7 @@ router.post('/',function(req, res ,next) {
 			console.log('error occured');
 		}
 		else{
-			console.log('thank you for signup');
-
+			res.render('index');
 		}
 	});
 

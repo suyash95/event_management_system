@@ -3,10 +3,10 @@ var mysql = require('mysql');
 
 var connection = mysql.createConnection(cfg.mysql);
 
-function storeEvents(param, cb) {
+function storevenue(param, cb) {
 
-    var query = "Insert into NOTICE values (?,?,?,?,?) "
-        var val = ['', param.body.date, param.body.type, param.body.title, param.decoded.conductedby, param.body.summary];
+    var query = "Insert into venue values (?,?,?,?) "
+        var val = ['',param.body.venueid, param.body.name,param.body.date,param.body.address];
    
     connection.query(query, val, function (err, rows) {
         if (err) {
@@ -19,5 +19,5 @@ function storeEvents(param, cb) {
 }
 
 module.exports = {
-	storedetails: storeEvents
+	storedetailss: storevenue
 }

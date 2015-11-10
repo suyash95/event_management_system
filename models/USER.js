@@ -9,7 +9,7 @@ connection.connect(function  (err) {
 
 function storeUser(param ,cb) {
 
-    var query = "Insert into user values (?,?,?,?)";
+    var query = "Insert into userdetails values (?,?,?,?,?)";
     var passw = param.body.password;
 
     crypto.pbkdf2(passw, 'Salt', 100, 30, function (err, key) {
@@ -19,7 +19,7 @@ function storeUser(param ,cb) {
         }
         passw = key.toString('hex');
 
-    var val =[param.body.firstname, param.body.lastname, param.body.ID, passw];
+    var val =[param.body.faculty_ID,param.body.firstname, param.body.lastname,param.body.workexperience,passw];
     connection.query(query, val ,function (err ,rows) {
         if (err){
             cb(err,null);
@@ -33,7 +33,7 @@ function storeUser(param ,cb) {
 
 function fetchUser(usrname, passwrd, cb) {
 
-        var query = "Select * from user where ID = ? and password = ?";
+        var query = "Select * from userdetails where faculty_ID = ? and password = ?";
 
         connection.query(query, [usrname, passwrd], function (err, rows) {
             if (err) {//console.log("feew");
@@ -52,7 +52,7 @@ function fetchUser(usrname, passwrd, cb) {
 
 
 function insToken(token, cb) {
-    var query = "Update user set token = ?";
+    var query = "Update userdetails set token = ?";
 
     connection.query(query, [token], function (err, rows) {
         if (err) {

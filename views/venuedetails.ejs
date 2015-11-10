@@ -17,36 +17,29 @@
                         <div class="col s12">
                             <div class="input-field ">
                                 <div class="col s12">
-                                    <input id="event_id" class="validate" name="event_id" placeholder="event_id"type="text">
+                                    <input id="venueid" class="validate" name="venueid" placeholder="venueid"type="text">
                                 </div>
                             </div>
                         </div>
                     </div>
-                            <div class="input-field col s12">
-                                <select class="select" name="type" id="type">
-                                    <option value="" disabled selected>Choose type</option>
-                                    <option value="technicaltalk" id="technicaltalk">technicaltalk</option>
-                                    <option value="workshop" id="workshop">workshop</option>
-                                </select>
-                            </div>
-
-                             <div class="input-field col s12">
-                                <select class="select" name="type2" id="type2">
-                                    <option value="" disabled selected>Choose type2</option>
-                                    <option value="conducted" id="conducted">conducted</option>
-                                    <option value="attended" id="attended">attended</option>
-                                </select>
-                            </div>
-
+                            
                              <div class="row">
                         <div class="col s12">
                             <div class="input-field ">
                                 <div class="col s12">
-                                    <input id="title" class="validate" name="title" placeholder="title" type="text">
+                                    <input id="name" class="validate" name="name" placeholder="name" type="text">
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                                <div class="col s12">
+                                    <div class="input-field col s6">
+                                        <input type="date" class=" datepicker" placeholder="date"
+                                               aria-expanded="false" name="date" id="sdate">
+                                    </div>
+                                </div>
+                            </div>
                             
                             
                             
@@ -54,7 +47,7 @@
                         <div class="col s12">
                             <div class="input-field ">
                                 <div class="col s12">
-                                    <input id="summary" class="validate" name="summary" placeholder="summary"type="text">
+                                    <input id="address" class="validate" name="address" placeholder="address" type="text">
                                 </div>
                             </div>
                         </div>
@@ -64,17 +57,17 @@
                         <div class="row">
                             <div class="col ">
                                 <button class="btn waves-effect waves-light mleft" type="submit" id="submitButton"
-                                        name="submitButton" value="Submit">next
+                                        name="submitButton" value="Submit">submit
                                 </button>
                             </div>
                         </div>
-                        <!--<div class="row">
+                        <div class="row">
                             <div class="col s6">
                                 <button class="btn waves-effect waves-light btleft bttop" type="button"
                                         onclick="logout()">Logout
                                 </button>
                             </div>
-                        </div>-->
+                        </div>
 
                     </form>
                 </div>
@@ -84,20 +77,28 @@
 </div>
 
 <script type="text/javascript">
-    $('#formData').submit(function (event) {
-        //event.preventDefault();
-        /*var credentials = {
-            faculty_ID: $('#faculty_ID').val(),
-            password: $('#password').val()
-        };*/
+console.log('reached')
+
+ $('.datepicker').pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 15 // Creates a dropdown of 15 years to control year
+    });
+
+ function logout() {
+        window.localStorage.removeItem("token");
+        window.location = "/"
+    }
+
+    $("#formData").submit(function (event) {
         console.log("Submit called")
         event.preventDefault();
         var $form = $(this),
                 url = $form.attr('action');
         token = window.localStorage.getItem("token");
         url = url + "?token=" + token;
-        formdata = new FormData(this);
+        //formdata = new FormData(this);
         console.log(formdata);
+        }
         var posting = $.ajax({
             url: url,
             type: "POST",
@@ -106,29 +107,3 @@
                 alert('uploaded');
             }
     });
-        /*$.post("http://localhost:3000/eventdetail +?token = +token",function () {
-            //window.localStorage.getItem('token')
-            $.ajax({
-                type: "GET",
-                url: "http://localhost:3000/venuedetail",
-                beforeSend: function (xhr) {
-                    token = window.localStorage.getItem("token");
-                    console.log(token);
-                    xhr.setRequestHeader("x-access-token", token);
-                },
-                success: function () {
-                    window.location = "http://localhost:3000/venuedetail" + "?token=" + token;
-                }
-            });
-        });
-    });*/
-
-   
-   
-    
-
-    
-</script>
-
-</body>
-</html>
