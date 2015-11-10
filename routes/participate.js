@@ -1,22 +1,25 @@
 var express = require('express');
 var router = express.Router();
-var USER =require('../models/USER');
+var participatess = require('../models/participatess');
 
 
 router.get('/',function(req,res){
-	res.render('register');
+	res.render('participate');
+
 });
 
 router.post('/',function(req, res ,next) {
-	USER.putUser(req ,function(err ,USER) {
+	participatess.storeTHING(req ,function(err ,participatess) {
 		if(err){
 			console.log('error occured');
 		}
 		else{
-			res.render('index');
+			console.log('submitted successfully');
 		}
 	});
 
 });
 
+
 module.exports = router;
+

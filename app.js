@@ -14,7 +14,7 @@ var login = require('./routes/login');
 var register = require('./routes/register');
 var eventdetail = require('./routes/eventdetail');
 var venuedetail = require('./routes/venuedetail');
-
+var participate = require('./routes/participate');
 var app = express();
 
 app.set('superSecret',cfg.secret)
@@ -35,6 +35,7 @@ app.use('/', routes);
 //app.use('/users', users);
 app.use('/login',login);
 app.use('/register',register);
+app.use('/participate',participate);
 
 app.use(function (req, res, next) {
 

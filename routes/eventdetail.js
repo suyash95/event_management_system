@@ -11,7 +11,7 @@ router.get('/',function(req,res,next) {
 router.post('/', function (req, res, next) {
     // console.log(req.body);
     if (req.query.token || req.headers['x-access-token']) {
-    	eventdetailss.storedetails(req, function (err, notice) {
+    	eventdetailss.storedetails(req, function (err, eventdetailss) {
                         if (err) {
                             console.log("errrrrrrrr");
                             res.json({msg: err});
